@@ -1,5 +1,15 @@
 import React, { useState, ChangeEvent } from 'react';
-import './App.css';
+import { Button, Container, Typography, TextField } from '@mui/material';
+import { styled } from '@mui/system';
+
+const StyledContainer = styled(Container)({
+  textAlign: 'center',
+  paddingTop: '20px',
+});
+
+const StyledButton = styled(Button)({
+  margin: '10px 0',
+});
 
 function App(): JSX.Element {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
@@ -45,22 +55,32 @@ function App(): JSX.Element {
   };
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Upload an audio file for transcription:
-          <input type="file" accept="audio/*" onChange={handleFileChange} />
-        </p>
-        <button onClick={handleUpload}>Upload</button>
-        {error && <p style={{ color: 'red' }}>{error}</p>}
-        {transcription && (
-          <div>
-            <h3>Transcription:</h3>
-            <p>{transcription}</p>
-          </div>
-        )}
-      </header>
-    </div>
+    <StyledContainer>
+      <Typography variant="h4" gutterBottom>
+        Audio Transcription
+      </Typography>
+      <TextField
+        type="file"
+        onChange={handleFileChange}
+        variant="outlined"
+        margin="normal"
+        fullWidth
+      />
+      <StyledButton variant="contained" color="primary" onClick={handleUpload}>
+        Upload
+      </StyledButton>
+      {error && (
+        <Typography variant="body1" style={{ color: 'red' }}>
+          {error}
+        </Typography>
+      )}
+      {transcription && (
+        <div>
+          <Typography variant="h5">Transcription:</Typography>
+          <Typography variant="body1">{transcription}</Typography>
+        </div>
+      )}
+    </StyledContainer>
   );
 }
 

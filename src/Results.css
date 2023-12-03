@@ -1,0 +1,66 @@
+/* Results.css */
+
+.results-container {
+    font-family: 'Arial', sans-serif; /* You can change the font family as per your preference */
+    padding: 20px;
+  }
+  
+  .main-score {
+    font-size: 30px;
+    color: #333;
+    margin-bottom: 20px;
+    margin-left: 40%;
+  }
+  
+  .sub-score {
+    font-size: 18px;
+    color: #555;
+  }
+  
+  .result-item {
+    margin-bottom: 15px;
+  }
+  
+  .result-image {
+    cursor: pointer;
+    width: 80px; /* Adjust image size as needed */
+    height: 80px;
+    margin-right: 10px;
+    border-radius: 5px; /* Optional: adds rounded corners to the images */
+  }
+  
+  .modal-image {
+    max-width: 100%;
+    max-height: 100%;
+    display: block;
+    margin: auto;
+  }
+  
+  /* Grid Divider Styling */
+  .Divider-root {
+    background-color: #ddd; /* Color of the divider */
+    height: 2px; /* Increase thickness */
+    margin: 20px 0;
+  }
+  
+  
+  /* Adjusting heading styles */
+  h1, h2, h3 {
+    color: #444;
+    margin: 10px 0;
+  }
+  
+  h1 {
+    font-size: 28px;
+  }
+  
+  h2 {
+    font-size: 22px;
+  }
+  
+  h3 {
+    font-size: 18px;
+  }
+  
+  /* You can add more styling as needed */
+  

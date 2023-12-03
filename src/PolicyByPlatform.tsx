@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import Platform from './Platform';
 import Policy from './Policy';
 
-const YourParentComponent = () => {
+const PolicyByPlatform = () => {
   const [selectedOption, setSelectedOption] = useState('');
   const [isSpecificOptionSelected, setIsSpecificOptionSelected] = useState(false);
 
@@ -18,9 +18,9 @@ const YourParentComponent = () => {
   return (
     <div>
       <Platform onDropdownChange={handleDropdownChange} selectedOption={selectedOption} />
-      <Policy isEnabled={isSpecificOptionSelected} />
+      {isSpecificOptionSelected && <Policy isEnabled={isSpecificOptionSelected} />}
     </div>
   );
 };
 
-export default YourParentComponent;
+export default PolicyByPlatform;

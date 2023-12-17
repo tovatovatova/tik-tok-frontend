@@ -1,25 +1,30 @@
-import React, { useState, ChangeEvent } from 'react';
+import React, { useState, ChangeEvent, useRef } from 'react';
 import './App.css'
 import Language from './Language';
 import PolicyByPlatform from './PolicyByPlatform';
 import Results from './Results';
-import type { ResultsParams } from './Results';
+import type { ResultsParams, Section } from './Results';
 import Form from './Form'
 import { CircularProgress } from '@mui/material';
+import Display from './Display';
+import ReactPlayer from 'react-player';
 
 function App(): JSX.Element {
-  const [results, setResults] = useState({} as ResultsParams);
+  const [results, setResults] = useState<Section[]>([]);
   const [loading, setLoading] = useState(false);
-
-  const handleSetResults = (data: ResultsParams) => {
+  const [videoFilePath, setVideoFilePath] = useState('')
+  const [playing, setPlaying] = useState(true)
+  const playerRef = React.createRef<ReactPlayer>()
+  const handleSetResults = (data: Section[]) => {
     setResults(data);
     setLoading(false); // stop loading when results are updated
   };
-
+  
   return (
     <div>
-      <Form setResults={handleSetResults} setLoading={setLoading}/>
-      {loading ? <div style={{ marginLeft: '50%', marginTop: '10%' }}><CircularProgress /></div> : JSON.stringify(results) == '{}' ? <p></p> : <div><Results {...results}/></div>}
+      <Form setResults={handleSetResults} setLoading={setLoading} setVideoFilePath={setVideoFilePath} />
+      <Display videoFilePath={videoFilePath} playerRef={playerRef} playing={playing} />
+      <div><Results results={results} playerRef={playerRef} setPlaying={setPlaying} /></div>
     </div>
   );
 }

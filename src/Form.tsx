@@ -11,7 +11,7 @@ const StyledButton = styled(Button)({
   margin: '10px 0',
 });
 
-function Form({ setResults, setLoading }: any): JSX.Element  {
+function Form({ setResults, setLoading, setVideoFilePath }: any): JSX.Element  {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [error, setError] = useState<string>('');
   const [platform, setPlatform] = useState('TikTok');
@@ -21,6 +21,7 @@ function Form({ setResults, setLoading }: any): JSX.Element  {
     const files = event.target.files;
     if (files && files.length > 0) {
       setSelectedFile(files[0]);
+      setVideoFilePath(URL.createObjectURL(files[0]))
     }
   };
 

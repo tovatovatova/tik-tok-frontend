@@ -27,6 +27,7 @@ function Form({ setResults, setLoading, setVideoFilePath, loading }: any): JSX.E
   };
 
   const handleUpload = async () => {
+    setResults([])
     if (process.env.REACT_APP_SAMPLE == 'true') {
       setLoading(true)
       setTimeout(() => setResults(SAMPLE_RESULTS), 3000)

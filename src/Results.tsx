@@ -24,7 +24,7 @@ export type ResultsParams = {
 const Results = ({ results, playerRef, setPlaying }: ResultsParams) => {
   return (<>
     {SECTIONS_TYPES.map((SectionType) => {
-      return <AnalyzeType setPlaying={setPlaying} SectionType={SectionType} playerRef={playerRef} sections={results.filter(section => section.type === SectionType)}/>
+      return <AnalyzeType key={SectionType} setPlaying={setPlaying} SectionType={SectionType} playerRef={playerRef} sections={results.filter(section => section.type === SectionType)}/>
     })}
   </>);
 };

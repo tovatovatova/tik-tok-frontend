@@ -28,11 +28,21 @@ export default ({ SectionType, sections, playerRef, setPlaying }: Params) => {
                     .map(section => {
                         const location = section.start / videoDuration * 100
                         return <Tooltip
+                            key={`${section.info}${section.start}`}
                             arrow={true}
                             title={<OurToolTip section={section}/>}
                             placement="top">
                             <div
-                                style={{ position: 'absolute', borderRadius: '50%', width: 20, height: 20, background: 'pink', bottom: -5, left: location + '%', cursor: 'pointer' }}
+                                style={{ 
+                                    position: 'absolute', 
+                                    borderRadius: '50%', 
+                                    width: 20, 
+                                    height: 20, 
+                                    background: 'pink', 
+                                    bottom: -5, 
+                                    left: location + '%', 
+                                    cursor: 'pointer', 
+                                }}
                                 onClick={() => {
                                     playerRef.current?.seekTo(section.start)
                                     setPlaying(false)

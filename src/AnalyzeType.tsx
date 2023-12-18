@@ -1,7 +1,7 @@
 import { RefObject, useState } from "react"
 import { Section, SectionTypes } from "./Results"
 import ReactPlayer from "react-player"
-import { Box, Modal, Tooltip, Typography } from "@mui/material"
+import { Tooltip } from "@mui/material"
 import OurToolTip from "./OurToolTip"
 
 
@@ -16,7 +16,6 @@ type Params = {
 export default ({ SectionType, sections, playerRef, setPlaying }: Params) => {
 
     const [threshold, setThreshold] = useState(5)
-    const videoDuration = playerRef.current?.getDuration() || 0
 
     return <div style={{ position: 'relative', height: 60 }}>
 
@@ -26,6 +25,8 @@ export default ({ SectionType, sections, playerRef, setPlaying }: Params) => {
                 {sections
                     .filter(section => section.score < threshold)
                     .map(section => {
+                        if (playerRef.current == null) return 
+                        const videoDuration = playerRef.current.getDuration()
                         const location = section.start / videoDuration * 100
                         return <Tooltip
                             key={`${section.info}${section.start}`}

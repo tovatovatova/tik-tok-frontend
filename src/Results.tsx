@@ -1,5 +1,4 @@
-import React, { Ref, RefObject, useState } from 'react';
-import { Grid, Modal, Divider } from '@mui/material';
+import React, { RefObject } from 'react';
 import './Results.css'; // Assuming you have a separate CSS file for styles
 import ReactPlayer from 'react-player';
 import AnalyzeType from './AnalyzeType';

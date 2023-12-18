@@ -18,9 +18,10 @@ type Params = {
     videoFilePath: string
     playerRef: RefObject<ReactPlayer>
     playing: boolean
+    setPlaying: any
 }
 
-export default ({ videoFilePath, playerRef, playing }: Params) => {
+export default ({ videoFilePath, playerRef, setPlaying, playing }: Params) => {
 
     if (videoFilePath === '') return null
     return (
@@ -32,6 +33,8 @@ export default ({ videoFilePath, playerRef, playing }: Params) => {
                 height="100%"
                 controls={true}
                 playing={playing}
+                onPlay={() => setPlaying(true)}
+                onPause={() => setPlaying(false)}
                 style={playerStyle}
             />
         </div>

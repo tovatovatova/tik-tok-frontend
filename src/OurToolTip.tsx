@@ -1,6 +1,6 @@
 import { Box, Modal, Typography } from "@mui/material"
 import { Section } from "./Results"
-import { ReactNode, createRef, useRef, useState } from "react";
+import { useState } from "react";
 
 
 const style = {
@@ -23,7 +23,7 @@ export default ({ section }: Params) => {
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
-    const modalRef = createRef<HTMLDivElement>()
+    // const modalRef = useRef<HTMLDivElement>(null)
 
     return <>
         <Modal

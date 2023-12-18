@@ -61,40 +61,40 @@ function Form({ setResults, setLoading, setVideoFilePath, loading }: any): JSX.E
 
   return (
 
-      <form onSubmit={(e) => e.preventDefault()}>
+    <form onSubmit={(e) => e.preventDefault()}>
 
-        <div className='row'>
-          <div className="form-group mr-2 col">
-            <label htmlFor="exampleSelect1" className="form-label mt-4">Select Platform</label>
-            <select className="form-select" id="exampleSelect1">
-              <option>TikTok</option>
-              <option>Instagram</option>
-              <option>Facebook</option>
-              <option>Youtube</option>
-            </select>
-          </div>
-          <div className="form-group col">
-
-            <label htmlFor="exampleSelect2" className="form-label mt-4">Select Language</label>
-            <select className="form-select" id="exampleSelect2">
-              <option>English</option>
-              <option>Hebrew</option>
-              <option>Russian</option>
-              <option>French</option>
-              <option>Spanish</option>
-            </select>
-          </div>
-          <div className="form-group col">
-
-            <label htmlFor="formFile" className="form-label mt-4">Select File to Analyze</label>
-            <input className="form-control" onChange={handleFileChange} type="file" id="formFile" />
-          </div>
+      <div className='row'>
+        <div className="form-group mr-2 col">
+          <label htmlFor="exampleSelect1" className="form-label mt-4">Select Platform</label>
+          <select className="form-select" id="exampleSelect1">
+            <option>TikTok</option>
+            <option>Instagram</option>
+            <option>Facebook</option>
+            <option>Youtube</option>
+          </select>
         </div>
-        <br />
-        <button type="submit" onClick={handleUpload} className="btn btn-primary col-lg-12" style={{height: 50, position: 'relative'}}>
-          {loading ? <CircularProgress style={{position: 'absolute', bottom: 5, left: '48%'}} size={35}/> : 'Analyze'}
-          </button>
-      </form>
+        <div className="form-group col">
+
+          <label htmlFor="exampleSelect2" className="form-label mt-4">Select Language</label>
+          <select className="form-select" id="exampleSelect2">
+            <option>English</option>
+            <option>Hebrew</option>
+            <option>Russian</option>
+            <option>French</option>
+            <option>Spanish</option>
+          </select>
+        </div>
+        <div className="form-group col">
+
+          <label htmlFor="formFile" className="form-label mt-4">Select File to Analyze</label>
+          <input className="form-control" onChange={handleFileChange} type="file" id="formFile" />
+        </div>
+      </div>
+      <br />
+      <button type="submit" onClick={handleUpload} className="btn btn-primary col-lg-12" style={{ height: 50, position: 'relative' }}>
+        {loading ? <CircularProgress style={{ position: 'absolute', bottom: 5, left: '48%' }} size={35} /> : 'Analyze'}
+      </button>
+    </form>
 
   )
   {/* <div>

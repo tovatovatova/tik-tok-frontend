@@ -19,8 +19,8 @@ function App(): JSX.Element {
     setResults(data);
     setLoading(false); // stop loading when results are updated
   };
-
   return (
+    
     <div className='container'>
       <Form setResults={handleSetResults} setLoading={setLoading} setVideoFilePath={setVideoFilePath} loading={loading} />
       <br />

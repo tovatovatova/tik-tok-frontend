@@ -1,6 +1,7 @@
 import React, { useState, ChangeEvent } from 'react';
 import { Button, Container, Typography, TextField, Grid, Select, MenuItem, CircularProgress } from '@mui/material';
 import { styled } from '@mui/system';
+import { SAMPLE_RESULTS } from './sampleResults';
 
 const StyledContainer = styled(Container)({
   textAlign: 'center',
@@ -26,6 +27,11 @@ function Form({ setResults, setLoading, setVideoFilePath, loading }: any): JSX.E
   };
 
   const handleUpload = async () => {
+    if (process.env.REACT_APP_SAMPLE == 'true') {
+      setLoading(true)
+      setTimeout(() => setResults(SAMPLE_RESULTS), 3000)
+      return
+    }
     try {
       setLoading(true)
       if (!selectedFile) {

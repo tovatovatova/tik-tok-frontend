@@ -1,7 +1,5 @@
 import React, { useState, ChangeEvent, useRef } from 'react';
 import './App.css'
-import Language from './Language';
-import PolicyByPlatform from './PolicyByPlatform';
 import Results from './Results';
 import type { ResultsParams, Section } from './Results';
 import Form from './Form'

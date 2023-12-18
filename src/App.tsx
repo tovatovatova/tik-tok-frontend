@@ -21,8 +21,9 @@ function App(): JSX.Element {
   };
   
   return (
-    <div>
-      <Form setResults={handleSetResults} setLoading={setLoading} setVideoFilePath={setVideoFilePath} />
+    <div className='container'>
+      <Form setResults={handleSetResults} setLoading={setLoading} setVideoFilePath={setVideoFilePath} loading={loading} />
+      <br/>
       <Display videoFilePath={videoFilePath} playerRef={playerRef} playing={playing} />
       <div><Results results={results} playerRef={playerRef} setPlaying={setPlaying} /></div>
     </div>

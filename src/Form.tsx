@@ -1,5 +1,5 @@
 import React, { useState, ChangeEvent } from 'react';
-import { Button, Container, Typography, TextField, Grid, Select, MenuItem } from '@mui/material';
+import { Button, Container, Typography, TextField, Grid, Select, MenuItem, CircularProgress } from '@mui/material';
 import { styled } from '@mui/system';
 
 const StyledContainer = styled(Container)({
@@ -11,7 +11,7 @@ const StyledButton = styled(Button)({
   margin: '10px 0',
 });
 
-function Form({ setResults, setLoading, setVideoFilePath }: any): JSX.Element  {
+function Form({ setResults, setLoading, setVideoFilePath, loading }: any): JSX.Element {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [error, setError] = useState<string>('');
   const [platform, setPlatform] = useState('TikTok');
@@ -29,18 +29,18 @@ function Form({ setResults, setLoading, setVideoFilePath }: any): JSX.Element  {
     try {
       setLoading(true)
       if (!selectedFile) {
-          setError('Please select a file');
-          return;
-        }
-        
-        const formData = new FormData();
-        formData.append('file', selectedFile);
-        
-        const response = await fetch('http://localhost:5000/upload', {
-            method: 'POST',
-            body: formData,
-        });
-        
+        setError('Please select a file');
+        return;
+      }
+
+      const formData = new FormData();
+      formData.append('file', selectedFile);
+
+      const response = await fetch('http://localhost:5000/upload', {
+        method: 'POST',
+        body: formData,
+      });
+
       if (response.ok) {
         const data = await response.json();
         if (data) {
@@ -55,15 +55,52 @@ function Form({ setResults, setLoading, setVideoFilePath }: any): JSX.Element  {
     } catch (error) {
       setError('Error uploading file');
     } finally {
-        setLoading(false)
+      setLoading(false)
     }
   };
 
   return (
-    <div>
+
+      <form onSubmit={(e) => e.preventDefault()}>
+
+        <div className='row'>
+          <div className="form-group mr-2 col">
+            <label htmlFor="exampleSelect1" className="form-label mt-4">Select Platform</label>
+            <select className="form-select" id="exampleSelect1">
+              <option>TikTok</option>
+              <option>Instagram</option>
+              <option>Facebook</option>
+              <option>Youtube</option>
+            </select>
+          </div>
+          <div className="form-group col">
+
+            <label htmlFor="exampleSelect2" className="form-label mt-4">Select Language</label>
+            <select className="form-select" id="exampleSelect2">
+              <option>English</option>
+              <option>Hebrew</option>
+              <option>Russian</option>
+              <option>French</option>
+              <option>Spanish</option>
+            </select>
+          </div>
+          <div className="form-group col">
+
+            <label htmlFor="formFile" className="form-label mt-4">Select File to Analyze</label>
+            <input className="form-control" onChange={handleFileChange} type="file" id="formFile" />
+          </div>
+        </div>
+        <br />
+        <button type="submit" onClick={handleUpload} className="btn btn-primary col-lg-12" style={{height: 50, position: 'relative'}}>
+          {loading ? <CircularProgress style={{position: 'absolute', bottom: 5, left: '48%'}} size={35}/> : 'Analyze'}
+          </button>
+      </form>
+
+  )
+  {/* <div>
       <StyledContainer>
         <Typography variant="h4" gutterBottom>
-          CHECK-TOK
+          CheckTok
         </Typography>
         <p>The Next Gen Video/Policy Analyzer</p>
         <Grid container direction="row" justifyContent="center" alignItems="center" spacing={2}>
@@ -111,8 +148,8 @@ function Form({ setResults, setLoading, setVideoFilePath }: any): JSX.Element  {
           </Grid>
         </Grid>
       </StyledContainer>
-    </div>
-  );
+    </div> */}
+
 }
 
 export default Form;

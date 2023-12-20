@@ -16,33 +16,38 @@ type Params = {
 export default ({ SectionType, sections, playerRef, setPlaying }: Params) => {
 
     const [threshold, setThreshold] = useState(5)
+    const [open, setOpen] = useState(false)
 
-    return <div style={{ position: 'relative', height: 60 }}>
+    return <>
+        <br />
+        <div style={{ position: 'relative', height: 60 }}>
 
-        <br /><br />
-        <div className="progress">
-            <div className="progress-bar progress-bar-striped bg-success" role="progressbar" style={{ width: 0 }} >
+            <br /><br />
+            <div className="progress">
                 {sections
-                    .filter(section => section.score < threshold)
+                    .filter(section => section.score <= threshold)
                     .map(section => {
-                        if (playerRef.current == null) return 
+                        if (playerRef.current == null) return
                         const videoDuration = playerRef.current.getDuration()
                         const location = section.start / videoDuration * 100
                         return <Tooltip
                             key={`${section.info}${section.start}`}
-                            arrow={true}
-                            title={<OurToolTip section={section}/>}
+                            arrow
+                            open={open}
+                            onOpen={() => setOpen(true)}
+                            onClose={() => setOpen(false)}
+                            title={<OurToolTip closeToolTip={()=>setOpen(false)} section={section} />}
                             placement="top">
                             <div
-                                style={{ 
-                                    position: 'absolute', 
-                                    borderRadius: '50%', 
-                                    width: 20, 
-                                    height: 20, 
-                                    background: 'pink', 
-                                    bottom: -5, 
-                                    left: location + '%', 
-                                    cursor: 'pointer', 
+                                style={{
+                                    position: 'absolute',
+                                    borderRadius: '50%',
+                                    width: 20,
+                                    height: 20,
+                                    background: '#e83283',
+                                    bottom: -5,
+                                    left: location + '%',
+                                    cursor: 'pointer',
                                 }}
                                 onClick={() => {
                                     playerRef.current?.seekTo(section.start)
@@ -52,9 +57,10 @@ export default ({ SectionType, sections, playerRef, setPlaying }: Params) => {
                             </div></Tooltip>
                     })}
             </div>
+            <p style={{ position: 'absolute', left: 0, bottom: 0, color: 'white', fontSize: 25 }}>{SectionType}</p>
+            <label htmlFor="customRange3" className="form-label" style={{ position: 'absolute', right: 160, bottom: 10 }}>{threshold}</label>
+            <Tooltip title="Choose your visible violations" placement="top" arrow followCursor={true}><input type="range" className="form-range" min="0" max="10" step="1" id="customRange3" value={threshold} onChange={e => setThreshold(e.target.valueAsNumber)} style={{ position: 'absolute', 'width': '20vh', right: 0, bottom: 15, color: 'blue' }} /></Tooltip>
+            <br /><br /><br />
         </div>
-        <p style={{ position: 'absolute', left: '-7em', bottom: '-1em', color: 'white', fontSize: 25 }}>{SectionType}</p>
-        <label htmlFor="customRange3" className="form-label" style={{ position: 'absolute', 'width': '10vh', right: -200, bottom: 0 }}>{threshold}</label>
-        <input type="range" className="form-range" min="1" max="10" step="1" id="customRange3" value={threshold} onChange={e => setThreshold(e.target.valueAsNumber)} style={{ position: 'absolute', 'width': '10vh', right: -150, bottom: -10, color: 'blue' }} />
-    </div>
+    </>
 }

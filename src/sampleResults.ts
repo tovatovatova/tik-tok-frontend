@@ -10,6 +10,14 @@ export const SAMPLE_RESULTS: Section[] = [
       "end": 10
     },
     {
+      "type": "text",
+      "info": "Text overlay: 'Extreme Stunt Performance'",
+      "reason": "Promotes dangerous activities",
+      "score": 10,
+      "start": 5,
+      "end": 10
+    },
+    {
       "type": "transcript",
       "info": "Speaker discussing political opinions in an aggressive tone",
       "reason": "Contains potentially harmful or inflammatory speech",

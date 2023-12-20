@@ -47,7 +47,7 @@ export default ({ SectionType, sections, playerRef, setPlaying }: Params) => {
                                     borderRadius: '50%',
                                     width: 20,
                                     height: 20,
-                                    background: '#e83283',
+                                    background: `rgb(255, ${section.score * 25.5}, 255)`,
                                     bottom: -5,
                                     left: location + '%',
                                     cursor: 'pointer',

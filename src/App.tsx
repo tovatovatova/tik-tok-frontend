@@ -20,6 +20,8 @@ function App(): JSX.Element {
   return (
     
     <div className='container'>
+      <h1 style={{color: "white", textAlign:"center", fontSize:"50px"}}>CheckTok</h1>
+      <h2 style={{color: "white", textAlign:"center"}}>Your video analyzer optimized for you</h2>
       <Form setResults={handleSetResults} setLoading={setLoading} setVideoFilePath={setVideoFilePath} loading={loading} />
       <br />
       <Display videoFilePath={videoFilePath} playerRef={playerRef} playing={playing} setPlaying={setPlaying} />

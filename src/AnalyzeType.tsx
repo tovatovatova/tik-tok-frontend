@@ -39,7 +39,7 @@ export default ({ SectionType, sections, playerRef, setPlaying }: Params) => {
                             // onClose={handleCloseTooltip}
                             key={`${section.info}${section.start}`}
                             arrow={true}
-                            title={<OurToolTip setModalSection={setModalSection} section={section} />}
+                            title={<OurToolTip onClick={() => setModalSection(section)} section={section} />}
                             placement="top">
                             <div
                                 style={{

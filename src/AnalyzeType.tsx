@@ -19,7 +19,7 @@ type Params = {
 export default ({ SectionType, sections, playerRef, setPlaying }: Params) => {
 
     const [threshold, setThreshold] = useState(5)
-    const [modalOpen, setModalOpen] = useState(false)
+    const [modalSection, setModalSection] = useState<Section | null>(null)
 
     return <>
         <br />
@@ -39,7 +39,7 @@ export default ({ SectionType, sections, playerRef, setPlaying }: Params) => {
                             // onClose={handleCloseTooltip}
                             key={`${section.info}${section.start}`}
                             arrow={true}
-                            title={<OurToolTip setModalOpen={setModalOpen} section={section} />}
+                            title={<OurToolTip setModalSection={setModalSection} section={section} />}
                             placement="top">
                             <div
                                 style={{
@@ -58,13 +58,13 @@ export default ({ SectionType, sections, playerRef, setPlaying }: Params) => {
                                 }}
                             >
                             </div></Tooltip>
-                            <OurModal modalOpen={modalOpen} setModalOpen={setModalOpen} section={section} />
                         </>
                     })}
             </div>
             <p style={{ position: 'absolute', left: 0, bottom: 0, color: 'white', fontSize: 25 }}>{SectionType}</p>
             <label htmlFor="customRange3" className="form-label" style={{ position: 'absolute', right: 160, bottom: 10 }}>{threshold}</label>
             <Tooltip title="Choose your visible violations" placement="top" arrow followCursor={true}><input type="range" className="form-range" min="0" max="10" step="1" id="customRange3" value={threshold} onChange={e => setThreshold(e.target.valueAsNumber)} style={{ position: 'absolute', 'width': '20vh', right: 0, bottom: 15, color: 'blue' }} /></Tooltip>
+            <OurModal section={modalSection} setModalSection={setModalSection} />
             <br /><br /><br />
         </div>
     </>

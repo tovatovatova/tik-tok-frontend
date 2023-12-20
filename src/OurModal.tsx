@@ -2,15 +2,15 @@ import { Modal } from "@mui/material"
 import { Section } from "./Results"
 
 type Params = {
-    modalOpen: boolean
-    setModalOpen: (_: boolean) => void
-    section: Section
+    section: Section | null
+    setModalSection: (_: null) => void
 }
 
-export default ({ modalOpen, setModalOpen, section }: Params) => {
+export default ({ section, setModalSection }: Params) => {
+    if (section == null) return null
     return <Modal
-        open={modalOpen}
-        onClose={() => setModalOpen(false)}
+        open
+        onClose={() => setModalSection(null)}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
     >

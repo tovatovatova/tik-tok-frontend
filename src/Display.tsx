@@ -31,11 +31,12 @@ export default ({ videoFilePath, playerRef, setPlaying, playing }: Params) => {
                 ref={playerRef}
                 width="100%"
                 height="100%"
-                controls={true}
+                controls
                 playing={playing}
                 onPlay={() => setPlaying(true)}
                 onPause={() => setPlaying(false)}
                 style={playerStyle}
+                muted
             />
         </div>
     )

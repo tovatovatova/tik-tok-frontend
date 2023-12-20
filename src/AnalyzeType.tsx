@@ -1,8 +1,11 @@
 import { RefObject, useState } from "react"
 import { Section, SectionTypes } from "./Results"
 import ReactPlayer from "react-player"
-import { Tooltip } from "@mui/material"
+import { Modal, Tooltip } from "@mui/material"
 import OurToolTip from "./OurToolTip"
+import OurModal from "./OurModal"
+
+
 
 
 
@@ -16,6 +19,7 @@ type Params = {
 export default ({ SectionType, sections, playerRef, setPlaying }: Params) => {
 
     const [threshold, setThreshold] = useState(5)
+    const [modalOpen, setModalOpen] = useState(false)
 
     return <div style={{ position: 'relative', height: 60 }}>
 
@@ -25,24 +29,27 @@ export default ({ SectionType, sections, playerRef, setPlaying }: Params) => {
                 {sections
                     .filter(section => section.score < threshold)
                     .map(section => {
-                        if (playerRef.current == null) return 
+                        if (playerRef.current == null) return
                         const videoDuration = playerRef.current.getDuration()
                         const location = section.start / videoDuration * 100
-                        return <Tooltip
+                        return <><Tooltip
+                            // open={tooltipOpen}
+                            // onOpen={handleOpenTooltip}
+                            // onClose={handleCloseTooltip}
                             key={`${section.info}${section.start}`}
                             arrow={true}
-                            title={<OurToolTip section={section}/>}
+                            title={<OurToolTip setModalOpen={setModalOpen} section={section} />}
                             placement="top">
                             <div
-                                style={{ 
-                                    position: 'absolute', 
-                                    borderRadius: '50%', 
-                                    width: 20, 
-                                    height: 20, 
-                                    background: 'pink', 
-                                    bottom: -5, 
-                                    left: location + '%', 
-                                    cursor: 'pointer', 
+                                style={{
+                                    position: 'absolute',
+                                    borderRadius: '50%',
+                                    width: 20,
+                                    height: 20,
+                                    background: 'pink',
+                                    bottom: -5,
+                                    left: location + '%',
+                                    cursor: 'pointer',
                                 }}
                                 onClick={() => {
                                     playerRef.current?.seekTo(section.start)
@@ -50,6 +57,8 @@ export default ({ SectionType, sections, playerRef, setPlaying }: Params) => {
                                 }}
                             >
                             </div></Tooltip>
+                            <OurModal modalOpen={modalOpen} setModalOpen={setModalOpen} section={section} />
+                        </>
                     })}
             </div>
         </div>

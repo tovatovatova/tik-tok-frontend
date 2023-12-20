@@ -3,54 +3,19 @@ import { Section } from "./Results"
 import { useState } from "react";
 
 
-const style = {
-    position: 'absolute' as 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 400,
-    bgcolor: 'background.paper',
-    border: '2px solid #000',
-    boxShadow: 24,
-    p: 4,
-};
-
-
 type Params = {
     section: Section
+    setModalOpen: (_: boolean) => void
 }
-export default ({ section }: Params) => {
-    const [open, setOpen] = useState(false);
-    const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
+export default ({ section, setModalOpen }: Params) => {
+    const handleOpen = () => {
+        setModalOpen(true)
+    }
+    const handleClose = () => setModalOpen(false);
     // const modalRef = useRef<HTMLDivElement>(null)
 
-    return <>
-        <Modal
-            open={open}
-            onClose={handleClose}
-            aria-labelledby="modal-modal-title"
-            aria-describedby="modal-modal-description"
-        >
-            <Box sx={style}>
-                <Typography id="modal-modal-title" variant="h6" component="h2">
-                    <h1>SCORE:</h1>
-                    {section.score}
-                </Typography>
-
-                <Typography id="modal-modal-description" sx={{ mt: 2, color: 'black' }}>
-                    <h1>INFO:</h1>
-                    {section.info}
-                </Typography>
-                <Typography id="modal-modal-description" sx={{ mt: 2, color: 'black' }}>
-
-                    <h1>REASON:</h1>
-                    {section.reason}
-                </Typography>
-
-            </Box>
-        </Modal>
-        <p>{section.reason}</p><p>score: {section.score}</p><button onClick={handleOpen} type="button">Details</button></>
+    return <div onClick={handleOpen} style={{cursor: 'pointer'}}>
+        <p>{section.reason}</p><p>score: {section.score}<span style={{fontSize: 25}}> ...</span></p></div>
 }
         // <div className="bs-component">
 
